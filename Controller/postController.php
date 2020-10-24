@@ -16,6 +16,7 @@ class PostController
      */
     public function view($postId)
     {
+        
         $postManager = new PostManager();
         $post = $postManager->getPost($postId);
 
@@ -64,8 +65,8 @@ class PostController
         } else {
             $data = json_decode($data, true);
             echo '<pre>';
-var_dump($data);
-var_dump($data['title']);
+// var_dump($data);
+// var_dump($data['title']);
             echo '</pre>';           
         }
         curl_close($curl);
@@ -100,13 +101,13 @@ var_dump($data['title']);
     //     $template = 'postView';
     //     include '../view/layout.php';
     // }
-    // //Affiche la liste des posts
-    // public function displayAll()
-    // {
-    //     $postManager = new PostManager();
-    //     $posts = $postManager->getPosts();
+    //Affiche la liste des posts
+    public function displayAll()
+    {
+        $postManager = new PostManager();
+        $posts = $postManager->getPosts();
 
-    //     $template = 'postsList';
-    //     include '../view/layout.php';
-    // }
+        $template = 'postsList';
+        include '../view/layout.php';
+    }
 }

@@ -50,8 +50,9 @@ var_dump($data['title']);
 var_dump($data['url']);
 var_dump($data['explanation']);
 var_dump($data['date']);
+
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('INSERT INTO post(post_id, title, img_url, explanation, creation) VALUES (?, ?, ?, ?, NOW())');
+        $req = $bdd->prepare('INSERT INTO post(title, img_url, explanation, creation) VALUES (?, ?, ?, ?)');
         
         return $req->execute(array($data['title'], $data['url'], $data['explanation'], $data['date']));
     }

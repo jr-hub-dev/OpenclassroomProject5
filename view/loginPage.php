@@ -5,15 +5,12 @@ foreach ($errors as $error) {
 ?>
 <section id="landscape">
 
-	<form class="formLogin" method="post"><?php if (empty($_SESSION['userLogin'])) {
-												echo '
+	<form class="formLogin" method="post">
 		<label for="newBilletTitle">Login</label>
 		<input id="userLogin" type="text" name="userLogin" >
 		<label for="userPassword"> Mot de passe :</label>
 		<input id="userPassword" type="password" name="userPassword">
 
 		<input type="submit" value="Se connecter">';
-											} else {
-												echo 'Vous êtes déjà logué';
-											} ?></form>
+</form>
 </section>

@@ -5,7 +5,7 @@ use App\Controller\PostController;
 use App\Controller\CommentController;
 use App\Controller\UserController;
 
-session_start();
+
 
 
 spl_autoload_register(function ($class) {

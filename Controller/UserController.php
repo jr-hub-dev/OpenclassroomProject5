@@ -84,6 +84,8 @@ class UserController
         include '../view/layout.php';
     }
 
+    
+
     //Modifier un user
     public function modify($userId)
     {

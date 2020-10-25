@@ -5,8 +5,8 @@
         </h1>
 
         <img src = "<?php echo $post->getUrl(); ?>"><br>
-        Date de création :<?php echo $post->getCreationDate()->format('d/m/Y /H:i:s'); ?>
-        Description :<?php echo $post->getExplanation(); ?>
+        Image du: <?php echo $post->getCreationDate()->format('d/m/Y'); ?><br>
+        Description : <?php echo $post->getExplanation(); ?>
 
         <form method="post">
             <label for="comment">Commentaire</label>

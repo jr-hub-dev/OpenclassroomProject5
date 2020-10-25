@@ -11,6 +11,6 @@ foreach ($errors as $error) {
 		<label for="userPassword"> Mot de passe :</label>
 		<input id="userPassword" type="password" name="userPassword">
 
-		<input type="submit" value="Se connecter">';
+		<input type="submit" value="Se connecter">
 </form>
 </section>

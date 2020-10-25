@@ -5,7 +5,7 @@ require_once('header.php');
 <body>
     <section id="welcome">
         <video src="./video/smoke.mp4" autoplay muted></video>
-        <h1>
+        <h1 id="mainTitle">
             <span>E</span>
             <span>x</span>
             <span>o</span>

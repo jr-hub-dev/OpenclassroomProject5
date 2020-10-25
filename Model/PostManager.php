@@ -46,11 +46,6 @@ class PostManager extends Database
     //Création nouveau post
     public function create($data)
     {
-var_dump($data['title']);
-var_dump($data['url']);
-var_dump($data['explanation']);
-var_dump($data['date']);
-
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('INSERT INTO post(title, img_url, explanation, creation) VALUES (?, ?, ?, ?)');
         

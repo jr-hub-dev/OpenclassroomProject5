@@ -65,6 +65,14 @@ class UserController
         $template = 'logoutPage';
         include '../view/layout.php';
     }
+    public function displayUsers() //juste check
+    {
+        $userManager = new UserManager;
+        $users = $userManager->displayUsers();
+
+        $template = 'alerts';
+        include '../view/layout.php';
+    }
 
 
     //Creation nouveau

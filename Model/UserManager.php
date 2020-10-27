@@ -89,6 +89,15 @@ class UserManager extends Database
         session_destroy();
         $_SESSION = [];
     }
+    public function displayUsers()
+    {
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('SELECT id, login, password, email, creation FROM user WHERE alert = 1'); // formater la date dans la vue + table avec 5 champs
+        $req->execute();
+        $result = $req->fetchAll();
+
+        return $this->hydrateMultiple($result);
+    }
 
     //Fonction pour création nouvel utilisateur
     public function create($userClean)
@@ -97,7 +106,7 @@ class UserManager extends Database
         $secure_pass = password_hash($userClean['userPassword'], PASSWORD_BCRYPT);
 
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('INSERT INTO user(login, password, email, creation) VALUES (?, ?, ?, NOW())');
+        $req = $bdd->prepare('INSERT INTO user(login, password, email, creation, alert) VALUES (?, ?, ?, NOW(), 1)');
         $req->execute(array($userClean['userLogin'], $secure_pass, $userClean['userEmail']));
 
         return $bdd->lastInsertId();
@@ -136,5 +145,15 @@ class UserManager extends Database
             ->setCreationDate(new DateTime($data['creation']));
 
         return $user;
+    }
+
+    public function hydrateMultiple($result)
+    {
+        $users = [];
+        foreach ($result as $user) {
+            $users[] = $this->hydrate($user);
+        }
+            
+        return $users;
     }
 }

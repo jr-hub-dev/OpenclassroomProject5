@@ -38,9 +38,9 @@ class CommentManager extends Database
     public function getAllByPostId($postId) 
     {   
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT id, post_id, content, creation, FROM comment WHERE post_id = ?'); // formater la date dans la vue + table avec 5 champs
+        $req = $bdd->prepare('SELECT id, post_id, content, creation FROM comment WHERE post_id = ?'); // formater la date dans la vue + table avec 5 champs
         $req->execute(array($postId));
-
+        
         return $this->hydrateMultiple($req->fetchAll());
     }
 

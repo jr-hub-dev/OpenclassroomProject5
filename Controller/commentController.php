@@ -30,7 +30,7 @@ class CommentController
     {
         $commentManager = new CommentManager();
         $comments = $commentManager->getAllByAlert();
-        $template = 'alert';
+        $template = 'alertsComment';
         include '../view/layout.php';
     }
     

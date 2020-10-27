@@ -56,14 +56,16 @@ if (!isset($_GET['action']) || 'home' === $_GET['action'] || '' === $_GET['actio
         $userController->checkUser();
     } elseif ('logout' === $_GET['action']) {
         $userController->logout();
-    } elseif ('alerts' === $_GET['action']) {
+    } elseif ('alertsUser' === $_GET['action']) {
         $userController->displayUsers();
+    } elseif ('admin' === $_GET['action']) {
+        $userController->admin();
     }
 } elseif ('comment' === $_GET['objet']) {
     $commentController = new CommentController;
     if ('alert' === $_GET['action']) {
         $commentController->alert($_GET['id']);
-    } elseif ('alerts' === $_GET['action']) {
+    } elseif ('alertsComment' === $_GET['action']) {
         $commentController->displayAllAlerts();
     }elseif ('delete' === $_GET['action']) {
         $commentController->delete($_GET['id']);

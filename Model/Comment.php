@@ -10,7 +10,6 @@ class Comment
     private $postNumber;
     private $content;
     private $creationDate;
-    private $updateDate;
 
 
     public function getId() : ?int //a utilisre dans la vue
@@ -56,17 +55,6 @@ class Comment
     public function setCreationDate(?DateTime $creationDate)// : self //int ou nul
     {
         $this->creationDate = $creationDate;
-
-        return $this;
-    }
-    public function getUpdateDate() : ?DateTime //a utiliser dans la vue
-    {
-        return $this->updateDate;
-    }
-
-    public function setupdateDate(?DateTime $updateDate)// : self //int ou nul
-    {
-        $this->updateDate = $updateDate;
 
         return $this;
     }

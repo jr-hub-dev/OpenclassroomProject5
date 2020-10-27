@@ -12,7 +12,7 @@ class CommentManager extends Database
     public function getComment($commentId) 
     {   
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT id, post_id, content, creation, modification FROM comment WHERE id = ?'); // formater la date dans la vue + table avec 5 champs
+        $req = $bdd->prepare('SELECT id, post_id, content, creation FROM comment WHERE id = ?'); // formater la date dans la vue + table avec 5 champs
         $req->execute(array($commentId));
 
         return $this->hydrate($req->fetch());
@@ -21,7 +21,7 @@ class CommentManager extends Database
     public function getComments() 
     {   
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT id, post_id, content, creation, modification FROM comment'); // formater la date dans la vue + table avec 5 champs
+        $req = $bdd->prepare('SELECT id, post_id, content, creation FROM comment'); // formater la date dans la vue + table avec 5 champs
         $req->execute();
         $result = $req->fetchAll();
 
@@ -38,7 +38,7 @@ class CommentManager extends Database
     public function getAllByPostId($postId) 
     {   
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT id, post_id, content, creation, modification FROM comment WHERE post_id = ?'); // formater la date dans la vue + table avec 5 champs
+        $req = $bdd->prepare('SELECT id, post_id, content, creation, FROM comment WHERE post_id = ?'); // formater la date dans la vue + table avec 5 champs
         $req->execute(array($postId));
 
         return $this->hydrateMultiple($req->fetchAll());
@@ -47,7 +47,7 @@ class CommentManager extends Database
     public function getAllByAlert() 
     {   
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT id, post_id, content, creation, modification FROM comment WHERE alert = 1'); // formater la date dans la vue + table avec 5 champs
+        $req = $bdd->prepare('SELECT id, post_id, content, creation FROM comment WHERE alert = 1'); // formater la date dans la vue + table avec 5 champs
         $req->execute();
         $result = $req->fetchAll();
 
@@ -77,7 +77,7 @@ class CommentManager extends Database
     public function create($postId, $commentClean)
     {
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('INSERT INTO comment(post_id, content, creation, modification) VALUES (?, ?, NOW(), NOW())');
+        $req = $bdd->prepare('INSERT INTO comment(post_id, content, creation) VALUES (?, ?, NOW())');
         $req->execute(array($postId, $commentClean['comment']));
     }
 
@@ -98,7 +98,6 @@ class CommentManager extends Database
             ->setPostNumber($data['post_id'])
             ->setContent($data['content'])
             ->setCreationDate(new DateTime($data['creation']))
-            ->setUpdateDate(new DateTime($data['modification']))
         ;
 
         return $comment;    

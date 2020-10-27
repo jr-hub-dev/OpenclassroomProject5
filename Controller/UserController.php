@@ -57,6 +57,7 @@ class UserController
         $template = 'loginPage';
         include '../view/layout.php';
     }
+    
     public function logout() //juste check
     {
         $userManager = new UserManager;
@@ -65,12 +66,17 @@ class UserController
         $template = 'logoutPage';
         include '../view/layout.php';
     }
+    public function admin() //juste check
+    {
+        $template = 'adminPage';
+        include '../view/layout.php';
+    }
     public function displayUsers() //juste check
     {
         $userManager = new UserManager;
         $users = $userManager->displayUsers();
 
-        $template = 'alerts';
+        $template = 'alertsUser';
         include '../view/layout.php';
     }
 

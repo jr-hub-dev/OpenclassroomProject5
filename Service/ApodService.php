@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Model\PostManager;
+
 class ApodService
 {
     public function __construct()

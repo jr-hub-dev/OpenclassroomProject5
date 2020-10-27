@@ -56,6 +56,8 @@ if (!isset($_GET['action']) || 'home' === $_GET['action'] || '' === $_GET['actio
         $userController->checkUser();
     } elseif ('logout' === $_GET['action']) {
         $userController->logout();
+    } elseif ('alerts' === $_GET['action']) {
+        $userController->displayUsers();
     }
 } elseif ('comment' === $_GET['objet']) {
     $commentController = new CommentController;

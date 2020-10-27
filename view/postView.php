@@ -16,6 +16,7 @@
         <form method="post">
             <table>
                 <tbody>
+                    Des gens ont laissé un commantaire
                     <?php foreach ($comments as $comment) { ?>
                         <tr>
                             <td><?php echo $comment->getContent(); ?></td>

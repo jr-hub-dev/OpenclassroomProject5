@@ -11,32 +11,7 @@ class PostController
     private $data = array();
     private $commentClean = array();
 
-    /**
-     * Afficher vue
-     */
-    public function view($postId)
-    {
-        
-        $postManager = new PostManager();
-        $post = $postManager->getPost($postId);
-
-
-        //Traitement du formulaire
-        $errors = $this->cleanData();
-        $commentManager = new CommentManager();
-        if (!empty($this->commentClean) && empty($errors)) {
-
-            $commentManager->create($postId, $this->postClean);
-
-            header('Location: index.php?objet=post&action=view&id=' . $postId);
-        }
-
-        $comments = $commentManager->getAllByPostId($postId);
-
-        $template = 'postView';
-        include '../view/layout.php';
-    }
-
+    
     public function cleanData()
     {
         $errors = [];
@@ -51,6 +26,33 @@ class PostController
 
         return $errors;
     }
+
+    /**
+     * Afficher vue
+     */
+    public function view($postId)
+    {
+        
+        $postManager = new PostManager();
+        $post = $postManager->getPost($postId);
+
+
+        //Traitement du formulaire
+        $errors = $this->cleanData();
+        $commentManager = new CommentManager();
+        if (!empty($this->commentClean) && empty($errors)) {
+            
+            $commentManager->create($postId, $this->commentClean);
+
+            header('Location: index.php?objet=post&action=view&id=' . $postId);
+        }
+
+        $comments = $commentManager->getAllByPostId($postId);
+
+        $template = 'postView';
+        include '../view/layout.php';
+    }
+
 
     public function getData()
     {

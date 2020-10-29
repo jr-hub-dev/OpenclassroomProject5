@@ -39,7 +39,7 @@ class UserManager extends Database
      * 2 : teste le mdp avec celui fournit par l'utilsiateur
      *
      *  @param string  $loginClean Login de l'utilisateur recherché
-     * @param string  $passwordClean le mdp à vérifier
+     * @param string  $passwordClean le mot de passe à vérifier
      */
     public function checkUser(string $loginClean, string $passwordClean)
     {
@@ -57,16 +57,19 @@ class UserManager extends Database
     }
 
     /**
-     * Permet de vérifier si l'inscription de l'utilisateur est validée avant connexion
+     * Permet de vérifier si l'inscription de l'utilisateur est validée avant assignation des roles en SESSION
      */
     public function checkAlert($resultat, $password_checked, $loginClean)
     {
+        //On test si pas d'alerte nle utilisateur
         if ($resultat['alert'] == 0) {
             if ($password_checked) {
+                //On appelle la fonction pour assigner les rôles
                 $this->roleAssign($resultat, $loginClean);
             } else {
                 echo 'Mauvais login ou mot de passe';
             }
+        //Si l'inscription de l'utilisateur est en attente de validation par l'administrateur
         } elseif ($resultat['alert'] == 1) {
             echo 'Votre inscription est en attente';
         }
@@ -76,7 +79,8 @@ class UserManager extends Database
      * Permet d'assigner les roles SESSION admin ou simple user aux utilisateurs
      *
      *  @param string  $loginClean Login de l'utilisateur recherché
-     * @param string  $passwordClean le mdp à vérifier
+     *  @param string $resultat  résultat de checkAlert
+     *  @param string $role variable contenant $_SESSION['userLevel']
      */
     public function roleAssign($resultat, string $loginClean)
     {
@@ -154,7 +158,7 @@ class UserManager extends Database
                 $req2->execute([':email' => $email]);
             }
             $result2 = $req2->fetchAll(PDO::FETCH_ASSOC);
-        }
+        } //Si l'email est deja utilisé
         if (!empty($result2)) {
             echo 'Cet email est déjà utilisé';
             exit;

@@ -45,21 +45,30 @@ class UserManager extends Database
     {
         $bdd = $this->dbConnect();
         // nous utilisons une requête préparée pour éviter les injections SQL
-        $req = $bdd->prepare('SELECT login, password, is_admin FROM user WHERE login = :login');
+        $req = $bdd->prepare('SELECT login, password, is_admin, alert FROM user WHERE login = :login');
         // on remplace la chaîne ":login" par la valeur de $loginClean
         $req->bindParam(':login', $loginClean);
         $req->execute();
         $resultat = $req->fetch();
-        var_dump($resultat['is_admin']);
 
         $password_checked = password_verify($passwordClean, $resultat['password']);
-        var_dump($password_checked);
 
-        //si le login et le password sont correct, on assigne les rôles en SESSION
-        if ($password_checked) {
-            $this->roleAssign($resultat, $loginClean);
-        } else {
-            echo 'Mauvais login ou mot de passe';
+        $this->checkAlert($resultat, $password_checked, $loginClean);
+    }
+
+    /**
+     * Permet de vérifier si l'inscription de l'utilisateur est validée avant connexion
+     */
+    public function checkAlert($resultat, $password_checked, $loginClean)
+    {
+        if ($resultat['alert'] == 0) {
+            if ($password_checked) {
+                $this->roleAssign($resultat, $loginClean);
+            } else {
+                echo 'Mauvais login ou mot de passe';
+            }
+        } elseif ($resultat['alert'] == 1) {
+            echo 'Votre inscription est en attente';
         }
     }
 
@@ -72,9 +81,7 @@ class UserManager extends Database
     public function roleAssign($resultat, string $loginClean)
     {
         $_SESSION['userLogin'] = $loginClean;
-        var_dump($_SESSION['userLogin']);
         $role = $resultat['is_admin'] == 1 ? "admin" : "user";
-        var_dump($role);
         $_SESSION['userLevel'] = $role;
         header('Location: index.php?action=home');
     }
@@ -134,7 +141,7 @@ class UserManager extends Database
             $req->execute([':login' => $login]);
         }
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($result);
+
         //On test si le login existe ou non en db
         if (!empty($result)) {
             echo 'Le login existe déjà';
@@ -147,7 +154,6 @@ class UserManager extends Database
                 $req2->execute([':email' => $email]);
             }
             $result2 = $req2->fetchAll(PDO::FETCH_ASSOC);
-            var_dump($result2);
         }
         if (!empty($result2)) {
             echo 'Cet email est déjà utilisé';

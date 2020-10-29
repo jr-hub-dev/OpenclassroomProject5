@@ -21,7 +21,7 @@ class CommentController
     {
         $commentManager = new CommentManager();
         $commentManager->noAlert($commentId);
-        header('Location: index.php?objet=comment&action=alerts');
+        header('Location: index.php?objet=comment&action=alertsComment');
         exit;
     }
 

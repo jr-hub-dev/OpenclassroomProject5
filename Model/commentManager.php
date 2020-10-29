@@ -64,7 +64,7 @@ class CommentManager extends Database
 
     public function noAlert($commentId)
     {
-        $comment = $this->getcomment($commentId);
+        $comment = $this->getComment($commentId);
         
         if (!empty($comment)) {
             $bdd = $this->dbConnect();

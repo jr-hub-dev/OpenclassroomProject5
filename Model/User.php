@@ -13,7 +13,7 @@ class User
     private $creationDate;
 
 
-    public function getId(): ?int
+    public function getId() : ?int
     {
         return $this->id;
     }

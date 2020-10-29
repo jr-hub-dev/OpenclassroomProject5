@@ -109,6 +109,25 @@ class UserManager extends Database
         return false;
     }
 
+    public function validUser($userId)
+    {
+        $userId = $this->getuser($userId);
+        
+        if (!empty($userId)) {
+            $bdd = $this->dbConnect();
+            $req = $bdd->prepare('UPDATE user SET alert = 0 WHERE id = :userId');
+            $req->bindParam(':userId', $userId);
+            $req->execute();
+        }
+    }
+    public function deleteUser($userId)
+    {
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('DELETE FROM user WHERE id = ?');
+        
+        return $req->execute(array($userId));
+    }
+
     /**
      * Fonction de logout
      */

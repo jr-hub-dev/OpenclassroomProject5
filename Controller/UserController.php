@@ -98,8 +98,30 @@ class UserController
         include '../view/layout.php';
     }
 
+    public function validUser($userId)
+    {
+        $userManager = new UserManager();
+        $userManager->validUser($userId);
+        header('Location: index.php?objet=user&action=alertsUser');
+        exit;
+    }
     
+    public function deleteUser($userId)
+    {        
+        $userManager = new UserManager();
+        $user = $userManager->getuser($userId);
 
+        if (!empty($user)) {
+            if ($userManager->delete($userId)) {
+                header('Location: index.php');
+                exit;
+            }
+            header('Location: index.php?objet=user&action=delete&id=' . $userId);
+        }
+
+        $template = 'cuserDelete';
+        include '../view/layout.php';
+    }
     //Modifier un user
     public function modify($userId)
     {

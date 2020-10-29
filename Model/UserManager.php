@@ -47,20 +47,24 @@ class UserManager extends Database
     {   
         $bdd = $this->dbConnect();
         // nous utilisons une requête préparée pour éviter les injections SQL
-        $req = $bdd ->prepare('SELECT login, password FROM user WHERE login = :login');
+        $req = $bdd ->prepare('SELECT login, password, is_admin FROM user WHERE login = :login');
         // on remplace la chaîne ":login" par la valeur de $loginClean
         $req->bindParam(':login', $loginClean);
         $req->execute();
         $resultat = $req->fetch();
+        var_dump($resultat['is_admin']);
+
         $password_checked = password_verify($passwordClean, $resultat['password']);
+        var_dump($password_checked);
         
         if ($password_checked) { 
             $_SESSION['userLogin'] = $loginClean;
-            // utilisation de la syntaxe dite 'ternaire'
-            // equivalent à if($loginClean == "admin") {$level="admin"} else {$level="user"}
-            $role = $loginClean == "admin" ? "admin": "user";
+            var_dump($_SESSION['userLogin']);
+            $role = $resultat['is_admin'] == 1 ? "admin": "user";
+            var_dump($role);
             $_SESSION['userLevel'] = $role;
-            header('Location: index.php?action=home');
+                header('Location: index.php?action=home');
+            
         }else{
             echo 'Mauvais login ou mot de passe';
         }

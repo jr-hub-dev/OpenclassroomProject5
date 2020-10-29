@@ -103,6 +103,39 @@ class UserManager extends Database
         return $this->hydrateMultiple($result);
     }
 
+    public function checkLoginPassword($userClean){
+        $login = $userClean['userLogin'];
+        $email = $userClean['userEmail'];
+
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('SELECT login FROM user WHERE login = :login');
+        if($req){
+            $req->execute([':login'=> $login]);
+        }
+
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($result);
+        
+        if(!empty($result)){
+            var_dump('Le login existe déjà');
+            die;
+        } else {
+            $req2 = $bdd->prepare('SELECT email FROM user WHERE email = :email');
+            $result2 = $req2->fetchAll(PDO::FETCH_ASSOC);
+            if($req2){
+                $req2->execute([':email'=> $email]);
+            }
+            $result2 = $req2->fetchAll(PDO::FETCH_ASSOC);
+            var_dump($result2);
+        } if(!empty($result2)){
+            var_dump('Cet email est déjà utilisé');
+            die;
+        } else {
+            $this->create($userClean);
+        }
+    }
+
+
     //Fonction pour création nouvel utilisateur
     public function create($userClean)
     {

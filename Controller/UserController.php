@@ -89,7 +89,7 @@ class UserController
         if (!empty($this->userClean) && empty($errors)) {
 
             $userManager = new UserManager();
-            $userId = $userManager->create($this->userClean);
+            $userId = $userManager->checkLoginPassword($this->userClean);
 
             header('Location: index.php?objet=user&action=view&id=' . $userId);
         }

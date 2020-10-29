@@ -61,6 +61,11 @@ if (!isset($_GET['action']) || 'home' === $_GET['action'] || '' === $_GET['actio
     } elseif ('admin' === $_GET['action']) {
         $userController->admin();
     }
+    elseif ('accept' === $_GET['action']) {
+        $userController->validUser($_GET['id']);
+    }elseif ('delete' === $_GET['action']) {
+        $userController->deleteUser($_GET['id']);
+    }
 } elseif ('comment' === $_GET['objet']) {
     $commentController = new CommentController;
     if ('alert' === $_GET['action']) {

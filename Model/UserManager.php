@@ -37,17 +37,15 @@ class UserManager extends Database
      * Permet de 
      * 1 : récupérer un utilisateur
      * 2 : teste le mdp avec celui fournit par l'utilsiateur
-     * 3 : assigne le role dans la variable de session de l'utilisateur
-     *  
-     * 
-     * @param string  $loginClean Login de l'utilisateur recherché
+     *
+     *  @param string  $loginClean Login de l'utilisateur recherché
      * @param string  $passwordClean le mdp à vérifier
      */
     public function checkUser(string $loginClean, string $passwordClean)
-    {   
+    {
         $bdd = $this->dbConnect();
         // nous utilisons une requête préparée pour éviter les injections SQL
-        $req = $bdd ->prepare('SELECT login, password, is_admin FROM user WHERE login = :login');
+        $req = $bdd->prepare('SELECT login, password, is_admin FROM user WHERE login = :login');
         // on remplace la chaîne ":login" par la valeur de $loginClean
         $req->bindParam(':login', $loginClean);
         $req->execute();
@@ -56,20 +54,31 @@ class UserManager extends Database
 
         $password_checked = password_verify($passwordClean, $resultat['password']);
         var_dump($password_checked);
-        
-        if ($password_checked) { 
-            $_SESSION['userLogin'] = $loginClean;
-            var_dump($_SESSION['userLogin']);
-            $role = $resultat['is_admin'] == 1 ? "admin": "user";
-            var_dump($role);
-            $_SESSION['userLevel'] = $role;
-                header('Location: index.php?action=home');
-            
-        }else{
+
+        if ($password_checked) {
+            $this->roleAssign($resultat, $loginClean);
+        } else {
             echo 'Mauvais login ou mot de passe';
         }
     }
 
+    /**
+     * Permet d'assigner les roles SESSION admin ou simple user aux utilisateurs
+     *
+     *  @param string  $loginClean Login de l'utilisateur recherché
+     * @param string  $passwordClean le mdp à vérifier
+     */
+    public function roleAssign($resultat, string $loginClean){
+        $_SESSION['userLogin'] = $loginClean;
+            var_dump($_SESSION['userLogin']);
+            $role = $resultat['is_admin'] == 1 ? "admin" : "user";
+            var_dump($role);
+            $_SESSION['userLevel'] = $role;
+            header('Location: index.php?action=home');
+    }
+    /**
+     * Permet de dispacher le $_SESSION['userLevel'] : admin ou simple user
+     */
     function isAdmin()
     {
         //Si la sesssion existe
@@ -87,12 +96,18 @@ class UserManager extends Database
         return false;
     }
 
-    //Fonction de déconnexion
+    /**
+     * Fonction de logout
+     */
     public function logout()
     {
         session_destroy();
         $_SESSION = [];
     }
+
+    /**
+     * Permet de récupérer la liste des utilisateurs à valider
+     */
     public function displayUsers()
     {
         $bdd = $this->dbConnect();
@@ -103,40 +118,47 @@ class UserManager extends Database
         return $this->hydrateMultiple($result);
     }
 
-    public function checkLoginPassword($userClean){
+    /**
+     * Permet de vérifier si login et email n'existe pas deja en db lors du sign up
+     */
+    public function checkLoginPassword($userClean)
+    {
         $login = $userClean['userLogin'];
         $email = $userClean['userEmail'];
 
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT login FROM user WHERE login = :login');
-        if($req){
-            $req->execute([':login'=> $login]);
+        if ($req) {
+            $req->execute([':login' => $login]);
         }
-
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
         var_dump($result);
-        
-        if(!empty($result)){
-            var_dump('Le login existe déjà');
-            die;
+        //On test si le login existe ou non en db
+        if (!empty($result)) {
+            echo 'Le login existe déjà';
+            exit;
+        //Si le login est ok, on test si l'email existe ou pas en db
         } else {
             $req2 = $bdd->prepare('SELECT email FROM user WHERE email = :email');
             $result2 = $req2->fetchAll(PDO::FETCH_ASSOC);
-            if($req2){
-                $req2->execute([':email'=> $email]);
+            if ($req2) {
+                $req2->execute([':email' => $email]);
             }
             $result2 = $req2->fetchAll(PDO::FETCH_ASSOC);
             var_dump($result2);
-        } if(!empty($result2)){
-            var_dump('Cet email est déjà utilisé');
-            die;
+        }
+        if (!empty($result2)) {
+            echo 'Cet email est déjà utilisé';
+            exit;
+        //Si le login ou l'email sont tous les deux ok, on enregistre l'utilisateur en db
         } else {
             $this->create($userClean);
         }
     }
 
-
-    //Fonction pour création nouvel utilisateur
+    /**
+     * Permet d'enregistrer le nouvel utilisateur avec une alerte fixée à 1 pour ressortir à valider par l'admin
+     */
     public function create($userClean)
     {
         //Cryptage du mot de passe
@@ -161,7 +183,10 @@ class UserManager extends Database
             $userId
         ));
     }
-    //Fonction du suppression utilisateur
+
+    /**
+     * Permet de supprimer un utilisateur lors de la validation de l'inscription
+     */
     public function delete($userId)
     {
         $bdd = $this->dbConnect();
@@ -190,7 +215,7 @@ class UserManager extends Database
         foreach ($result as $user) {
             $users[] = $this->hydrate($user);
         }
-            
+
         return $users;
     }
 }

@@ -14,7 +14,7 @@ require_once('header.php');
             <span>b</span>
         </h1>
 
-        <a id="scroll" href="#apod"><span></span>Scroll</a>
+        <a id="scroll" href="#apod"><span></span><i class="fas fa-chevron-down fa-4x"></i></a>
     </section>
     <section id="apod">
         <h2>NASA Astronomy Picture Of The Day</h2>

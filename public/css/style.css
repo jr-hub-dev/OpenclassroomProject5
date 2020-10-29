@@ -2,12 +2,16 @@ body {
     margin: 0;
     padding: 0;
 }
+
 html {
     scroll-behavior: smooth !important;
 }
 
+/*Header*/
+
 
 /* Page d'accueil*/
+
 #welcome {
     height: 100vh;
     background: #000;
@@ -93,7 +97,8 @@ video {
     color: white;
     margin-top: -1.5%;
 }
-#pic{
+
+#pic {
     width: 1200px;
     height: 800px;
     margin-left: 20%;
@@ -109,34 +114,106 @@ video {
     text-align: center;
     white-space: nowrap;
 }
+
 #scroll a {
     padding-top: 60px;
-  }
-  #scroll a span {
+}
 
+#scroll a span {
     border-left: 1px solid #fff;
     border-bottom: 1px solid #fff;
     transform: rotate(-45deg);
     animation: sdb04 2s infinite;
     box-sizing: border-box;
     color: white;
-  }
+}
 
-  @keyframes sdb04 {
+@keyframes sdb04 {
     0% {
-      transform: rotate(-45deg) translate(0, 0);
+        transform: rotate(-45deg) translate(0, 0);
     }
     20% {
-      transform: rotate(-45deg) translate(-10px, 10px);
+        transform: rotate(-45deg) translate(-10px, 10px);
     }
     40% {
-      transform: rotate(-45deg) translate(0, 0);
+        transform: rotate(-45deg) translate(0, 0);
     }
-  }
-/*Page PostList*/
-td #img{
+}
+
+/*============================
+ * ============================
+ * 	Modif page PostsList
+ * ============================
+ * ==========================*/
+
+td #img {
     width: 200px;
 }
-#container{
+
+#container {
     justify-content: center;
+}
+
+/*Couleur de fond du tableau*/
+
+table {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/*Taille des cellules du tableau*/
+
+tbody tr td {
+    width: 20%;
+    height: auto;
+}
+
+/*suppression des bordures internes du tableau activités*/
+
+td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(4) {
+    border-right: hidden;
+}
+
+td {
+    border: none;
+}
+
+/*Ajout de bordure a table*/
+
+table {
+    border: 1px solid black;
+}
+
+th {
+    border-bottom: 1px solid black;
+}
+
+/*Au survol des activités du tableau*/
+
+tbody tr {
+    transition: all .2s ease-in-out;
+}
+
+tbody tr:hover {
+    background-color: #F2F2F2;
+    transform: scale(1.01);
+}
+
+/*Mise en style du bouton Inscription*/
+
+tbody td:nth-child(5) a {
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    background-color: #E3E3E3;
+}
+
+tbody td:nth-child(5) a:hover {
+    background-color: #053772;
+    color: white;
+}
+
+/*Ajout marge entre titre et tableau*/
+
+table {
+    margin-top: 5%
 }

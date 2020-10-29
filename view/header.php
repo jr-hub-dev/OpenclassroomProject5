@@ -1,6 +1,8 @@
 <header>
 	<nav id="banniere">
 
+		<label for="toggle">&#9776;</label>
+		<input type="checkbox" id=toggle>
 		<ul id="menu">
 			<li><a href="index.php?action=home">Accueil</a></li>
 			<li><a href='index.php?objet=user&action=create'>S'enregistrer</a></li>

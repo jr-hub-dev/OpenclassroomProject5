@@ -64,7 +64,6 @@ class PostManager extends Database
     //Hydratation de l'objet
     public function hydrate($data)
     {
-        var_dump($data['title']);
         $post = new Post();
         $post
             ->setId($data['post_id'])

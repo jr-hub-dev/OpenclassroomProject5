@@ -111,9 +111,9 @@ class UserManager extends Database
 
     public function validUser($userId)
     {
-        $userId = $this->getuser($userId);
+        $user = $this->getUser($userId);
         
-        if (!empty($userId)) {
+        if (!empty($user)) {
             $bdd = $this->dbConnect();
             $req = $bdd->prepare('UPDATE user SET alert = 0 WHERE id = :userId');
             $req->bindParam(':userId', $userId);

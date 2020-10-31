@@ -33,15 +33,6 @@ class PostManager extends Database
         return $posts;
     }
 
-    // //Retourne le dernier post
-    // public function returnLast()
-    // {
-    //     $bdd = $this->dbConnect();
-    //     $req = $bdd->prepare('SELECT post_id, title, img_url, explanation, creation FROM post WHERE post_id = ( SELECT MAX(post_id) FROM post );');
-    //     $req->execute(array());
-
-    //     return $this->hydrate($req->fetch());
-    // }
 
     //Création nouveau post
     public function create($data)
@@ -59,6 +50,18 @@ class PostManager extends Database
         $req = $bdd->prepare('DELETE FROM post WHERE post_id = ?');
 
         return $req->execute(array($postId));
+    }
+
+    public function uploadFile($fileExt)
+    {
+        $tmpName = $_FILES['uploaded_file']['tmp_name'];
+        $uniqueName = md5(uniqid(rand(), true));
+        $fileName = "../upload/" . $uniqueName . $fileExt;
+        $resultat = move_uploaded_file($tmpName, $fileName);
+        if($resultat){
+            echo 'fichier uploader';
+        }
+
     }
 
     //Hydratation de l'objet

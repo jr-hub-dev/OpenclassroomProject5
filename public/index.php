@@ -31,15 +31,7 @@ if (!isset($_GET['action']) || 'home' === $_GET['action'] || '' === $_GET['actio
     if ('view' === $_GET['action']) {
         $postController->view($_GET['id']);
         //Creation du post
-    } elseif ('create' === $_GET['action']) {
-        $postController->create();
-        //Modification du post  
-    } elseif ('modify' === $_GET['action']) {
-        $postController->modify($_GET['id']);
-        //Suppression du post
-    } elseif ('delete' === $_GET['action']) {
-        $postController->delete($_GET['id']);
-    }
+    } 
     //Affiche liste des posts
     elseif ('postsList' === $_GET['action']) {
         $postController->displayAll();
@@ -65,6 +57,8 @@ if (!isset($_GET['action']) || 'home' === $_GET['action'] || '' === $_GET['actio
         $userController->validUser($_GET['id']);
     }elseif ('delete' === $_GET['action']) {
         $userController->deleteUser($_GET['id']);
+    }elseif ('upload' === $_GET['action']) {
+        $userController->testFile();
     }
 } elseif ('comment' === $_GET['objet']) {
     $commentController = new CommentController;

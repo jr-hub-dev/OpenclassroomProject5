@@ -123,20 +123,39 @@ class UserController
         include '../view/layout.php';
     }
     //Modifier un user
-    public function modify($userId)
+ /**
+     * Test le fichier à uploader
+     */
+    public function testFile()
     {
-        $userManager = new UserManager();
-        $user = $userManager->getUser($userId);
+        if (isset($_POST['submit'])) {
 
-        $this->cleanData();
+            $maxSize = 70000;
+            $validExt = array('.jpg', '.jpeg', '.png');
+            $fileSize = $_FILES['uploaded_file']['size'];
+            $fileName = $_FILES['uploaded_file']['name'];
+            $fileExt = "." . strtolower(substr(strrchr($fileName, '.'), 1));
 
-        if (!empty($_POST)) {
-            if ($userManager->modify($userId)) {
-                header('Location: index.php?objet=user&action=view&id=' . $userId);
+            if ($_FILES['uploaded_file']['error'] > 0) {
+                echo 'une erreur est survenue';
+            } elseif ($fileSize > $maxSize) {
+                echo 'le fichier est trop gros';
+            } elseif (!in_array($fileExt, $validExt)) {
+
+                echo 'extension nest pas bonne';
+            } else {
+                $this->upload($fileExt);
             }
         }
-
-        $template = 'userModify';
+        $template = 'fileUpload';
         include '../view/layout.php';
+    }
+    /**
+     * Upload du fichier
+     */
+    public function upload($fileExt)
+    {
+        $userManager = new UserManager();
+        $userManager->uploadFile($fileExt);
     }
 }

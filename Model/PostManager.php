@@ -52,17 +52,7 @@ class PostManager extends Database
         return $req->execute(array($postId));
     }
 
-    public function uploadFile($fileExt)
-    {
-        $tmpName = $_FILES['uploaded_file']['tmp_name'];
-        $uniqueName = md5(uniqid(rand(), true));
-        $fileName = "../upload/" . $uniqueName . $fileExt;
-        $resultat = move_uploaded_file($tmpName, $fileName);
-        if($resultat){
-            echo 'fichier uploader';
-        }
-
-    }
+    
 
     //Hydratation de l'objet
     public function hydrate($data)

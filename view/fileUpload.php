@@ -1,7 +1,9 @@
 <section class="landscape">
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="uploaded_file" /> <br />
-        <input type="submit" name="submit" /> <br />
+    <div class="block">
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="uploaded_file" /> <br />
+            <input type="submit" name="submit" /> <br />
 
-    </form>
+        </form>
+    </div>
 </section>

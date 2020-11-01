@@ -1,3 +1,5 @@
 <section class="apod">
-    <p id="signal">Vous avez signalé un commentaire</h1>
+    <div class="block">
+        <p id="signal">Vous avez signalé un commentaire</h1>
+    </div>
 </section>

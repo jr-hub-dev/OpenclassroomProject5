@@ -1,4 +1,4 @@
-<section id="landscape">
+<section class="apod">
     <table>
         <tbody>
             <?php foreach ($posts as $post) { ?>

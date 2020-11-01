@@ -1,4 +1,4 @@
-<section id="landscape">
+<section class="apod">
     <form class="formLogin" method="post">
         <p>Veuillez entrez vos login et mot de passe</p>
         <label for="newUser">Login</label>

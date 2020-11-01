@@ -3,7 +3,7 @@ foreach ($errors as $error) {
 	echo $error . '<br/>';
 }
 ?>
-<section id="landscape">
+<section class="apod">
 
 	<form class="formLogin" method="post">
 		<label for="newBilletTitle">Login</label>

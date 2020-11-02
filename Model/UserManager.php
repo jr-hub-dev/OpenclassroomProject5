@@ -164,6 +164,7 @@ class UserManager extends Database
             $req->execute([':login' => $login]);
         }
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
+        
 
         //On test si le login existe ou non en db
         if (!empty($result)) {
@@ -194,6 +195,7 @@ class UserManager extends Database
     {
         //Cryptage du mot de passe
         $secure_pass = password_hash($userClean['userPassword'], PASSWORD_BCRYPT);
+        
 
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('INSERT INTO user(login, password, email, creation, alert) VALUES (?, ?, ?, NOW(), 1)');
@@ -228,7 +230,7 @@ class UserManager extends Database
     public function uploadFile($fileExt)
     {
         $tmpName = $_FILES['uploaded_file']['tmp_name'];
-        $uniqueName = md5(uniqid(rand(), true));
+        $uniqueName = $_SESSION['userLogin'] . md5(uniqid(rand(), true));
         $fileName = "../upload/" . $uniqueName . $fileExt;
         $resultat = move_uploaded_file($tmpName, $fileName);
         if($resultat){

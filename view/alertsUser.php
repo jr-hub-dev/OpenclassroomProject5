@@ -1,5 +1,5 @@
 <?php if (array_key_exists('userLogin', $_SESSION) && $_SESSION['userLevel'] == 'admin') { ?>
-    <section class="landscape">
+    <section class="apod">
             <tbody>
                 <?php foreach ($users as $user) { ?>
                     <tr>

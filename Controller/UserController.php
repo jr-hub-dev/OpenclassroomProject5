@@ -57,7 +57,7 @@ class UserController
         $template = 'loginPage';
         include '../view/layout.php';
     }
-    
+
     public function logout() //juste check
     {
         $userManager = new UserManager;
@@ -68,16 +68,30 @@ class UserController
     }
     public function admin() //juste check
     {
-        $template = 'adminPage';
-        include '../view/layout.php';
+        $userManager = new UserManager();
+        $admin = $userManager->isAdmin();
+        if (!empty($_SESSION)) {
+            if ($admin === "admin") {
+                $template = 'adminPage';
+                include '../view/layout.php';
+            }
+        } else {
+            header('Location: index.php?action=home');
+        }
     }
     public function displayUsers() //juste check
     {
-        $userManager = new UserManager;
-        $users = $userManager->displayUsers();
+        $userManager = new UserManager();
+        $userManager->isAdmin();
+        if (!empty($_SESSION)) {
+            $userManager = new UserManager;
+            $users = $userManager->displayUsers();
 
-        $template = 'alertsUser';
-        include '../view/layout.php';
+            $template = 'alertsUser';
+            include '../view/layout.php';
+        } else {
+            header('Location: index.php?action=home');
+        }
     }
 
 
@@ -102,12 +116,13 @@ class UserController
     {
         $userManager = new UserManager();
         $userManager->validUser($userId);
+
         header('Location: index.php?objet=user&action=alertsUser');
         exit;
     }
-    
+
     public function deleteUser($userId)
-    {        
+    {
         $userManager = new UserManager();
         $user = $userManager->getuser($userId);
 
@@ -119,36 +134,39 @@ class UserController
             header('Location: index.php?objet=user&action=delete&id=' . $userId);
         }
 
-        $template = 'cuserDelete';
+        $template = 'userDelete';
         include '../view/layout.php';
     }
     //Modifier un user
- /**
+    /**
      * Test le fichier à uploader
      */
     public function testFile()
     {
-        if (isset($_POST['submit'])) {
+        if (!empty($_SESSION)) {
 
-            $maxSize = 70000;
-            $validExt = array('.jpg', '.jpeg', '.png');
-            $fileSize = $_FILES['uploaded_file']['size'];
-            $fileName = $_FILES['uploaded_file']['name'];
-            $fileExt = "." . strtolower(substr(strrchr($fileName, '.'), 1));
+            if (isset($_POST['submit'])) {
 
-            if ($_FILES['uploaded_file']['error'] > 0) {
-                echo 'une erreur est survenue';
-            } elseif ($fileSize > $maxSize) {
-                echo 'le fichier est trop gros';
-            } elseif (!in_array($fileExt, $validExt)) {
+                $maxSize = 70000;
+                $validExt = array('.jpg', '.jpeg', '.png');
+                $fileSize = $_FILES['uploaded_file']['size'];
+                $fileName = $_FILES['uploaded_file']['name'];
+                $fileExt = "." . strtolower(substr(strrchr($fileName, '.'), 1));
 
-                echo 'extension nest pas bonne';
-            } else {
-                $this->upload($fileExt);
+                if ($_FILES['uploaded_file']['error'] > 0) {
+                    echo 'une erreur est survenue';
+                } elseif ($fileSize > $maxSize) {
+                    echo 'le fichier est trop gros';
+                } elseif (!in_array($fileExt, $validExt)) {
+
+                    echo 'extension nest pas bonne';
+                } else {
+                    $this->upload($fileExt);
+                }
             }
+            $template = 'fileUpload';
+            include '../view/layout.php';
         }
-        $template = 'fileUpload';
-        include '../view/layout.php';
     }
     /**
      * Upload du fichier

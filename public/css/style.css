@@ -185,6 +185,16 @@ video {
     background-position: center;
     background-attachment: fixed;
 }
+.apod3 {
+    background-image: url(../img/nebula.jpg);
+    color: white;
+    margin-top: -1.5%;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 
 .title2 {
     padding-top: 2%;
@@ -551,10 +561,10 @@ footer {
         font-size: 4em;
     }
     .apod2 {
-        height: auto;
+        height: 500px;
     }
     #apod4{
-        height: 500px;
+        height: auto;
     }
     #apod6{
         height: 500px;

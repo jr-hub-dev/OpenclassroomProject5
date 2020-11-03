@@ -1,4 +1,4 @@
-<section class="apod2">
+<section id="apod6" class="apod2">
     <div id="blockCreate">
         <form class="formLogin" method="post">
             <p>Veuillez choisir vos login et mot de passe</p>

@@ -1,4 +1,4 @@
-<section id="apod5" class="apod2">
+<section id="apod5" class="apod3">
     <?php if (array_key_exists('userLogin', $_SESSION)) { ?>
         <div id="container">
             <h1 class="title2">

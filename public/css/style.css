@@ -163,7 +163,7 @@ video {
     }
 }
 
-.apod {
+#apod {
     background-image: url(../img/nebula.jpg);
     color: white;
     margin-top: -1.5%;
@@ -173,9 +173,26 @@ video {
     background-position: center;
     background-attachment: fixed;
 }
+.apod2 {
+    background-image: url(../img/nebula.jpg);
+    height: 1250px;
+    color: white;
+    margin-top: -1.5%;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 
-#title2 {
+.title2 {
     padding-top: 2%;
+    border: 1px solid;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    width: 70%;
+    font-size: 20px;
+    margin-left: 15%;
 }
 
 #pic {

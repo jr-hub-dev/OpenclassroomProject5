@@ -1,4 +1,4 @@
-<section id="apod4" class="apod3">
+<section id="apodPostList">
     <table>
         <tbody id="tbody">
             <?php foreach ($posts as $post) { ?>

@@ -17,10 +17,10 @@
                 <input type="submit" name="Ajouter" value="Ajouter">
             </form>
             <form method="post">
-                <table>
+                <table id="comments">
                     <tbody>
                         <?php foreach ($comments as $comment) { ?>
-                            <tr>
+                            <tr id="comments">
                                 <td><?php echo $comment->getContent(); ?></td>
                                 <td><a href="index.php?objet=comment&action=alert&id=<?php echo $comment->getId(); ?>">Signaler</a></td>
                             </tr>

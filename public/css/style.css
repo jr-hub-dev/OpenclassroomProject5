@@ -176,7 +176,7 @@ video {
 
 .apod2 {
     background-image: url(../img/nebula.jpg);
-    height: 1500px;
+    height: 1800px;
     color: white;
     margin-top: -1.5%;
     text-align: center;
@@ -188,6 +188,18 @@ video {
 .apod3 {
     background-image: url(../img/nebula.jpg);
     color: white;
+    height: 1600px;
+    margin-top: -1.5%;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+#apodPostList {
+    background-image: url(../img/nebula.jpg);
+    color: white;
+    height: auto;
     margin-top: -1.5%;
     text-align: center;
     background-repeat: no-repeat;
@@ -278,6 +290,12 @@ th {
 #picPost{
     width: 80%;
 }
+#comments{
+    position: relative;
+    left: 20%;
+    font-size: 20px;
+}
+
 
 /*============================
  * ============================
@@ -373,7 +391,7 @@ footer {
     left: 15%;
     font-size: 25px;
     padding: 5px;
-    color: black;
+    color: white;
 }
 /*============================
  * ============================
@@ -460,6 +478,15 @@ footer {
     font-size: 20px;
     margin-left: 20%;
 }
+/*============================
+ * ============================
+ * 	Media Queries max 1800px
+ * ============================
+ * ==========================*/
+
+ .apod3{
+     height: 1700px;
+ }
 /*============================
  * ============================
  * 	Media Queries max 1440px
@@ -563,9 +590,7 @@ footer {
     .apod2 {
         height: 500px;
     }
-    #apod4{
-        height: auto;
-    }
+
     #apod6{
         height: 500px;
     }

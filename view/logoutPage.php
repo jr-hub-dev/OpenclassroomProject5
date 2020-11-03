@@ -1,5 +1,5 @@
 <section class="apod2">
-    <div class="block">
-        <h1>Vous êtes déconnectés</h1>
+    <div id="blockLogout">
+        <h1 id="logout">Vous êtes déconnectés</h1>
     </div>
 </section>

@@ -2,6 +2,7 @@
     <section class="apod2">
             <tbody>
                 <?php foreach ($users as $user) { ?>
+                    <div id='blockUser'>
                     <tr>
                         <td><?php echo $user->getId(); ?></td>
                         <td><?php echo $user->getLogin(); ?></td>
@@ -22,6 +23,7 @@
                             </form>
                         </td>
                     </tr>
+                </div>
                 <?php } ?>
             </tbody>
         </table>

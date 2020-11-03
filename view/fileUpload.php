@@ -2,7 +2,7 @@
     <section class="apod2">
 
         <h1 id='titleUp'>Proposer vos photos du ciel, elles seront peut-être selectionnées pour apparaître sur notre site prochainement !</h1>
-        <div class="block">
+        <div id="blockUpload">
             <form method="POST" enctype="multipart/form-data">
                 <input type="file" name="uploaded_file" /> <br />
                 <input type="submit" name="submit" /> <br />

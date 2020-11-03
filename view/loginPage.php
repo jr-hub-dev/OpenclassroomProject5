@@ -3,8 +3,8 @@ foreach ($errors as $error) {
 	echo $error . '<br/>';
 }
 ?>
-<section class="apod2">
-	<div class="block">
+<section id="apod6" class="apod2">
+	<div id="blockLogin">
 
 		<form id="formLogin" method="post">
 			<label id="label1" for="newBilletTitle">Login</label>

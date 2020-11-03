@@ -1,8 +1,8 @@
-<section class="apod2">
+<section id="apod3" class="apod2">
     <?php if (array_key_exists('userLogin', $_SESSION) && $_SESSION['userLevel'] == 'admin') { ?>
-        <div class ="block">
-            <a class="button" href="index.php?objet=user&action=alertsUser">Voir les nouveaux utilisateurs</a>
-            <a class="button" href="index.php?objet=comment&action=alertsComment">Voir les commentaires signalés</a>
+        <div id ="blockAdmin">
+            <a id="button1" class="button" href="index.php?objet=user&action=alertsUser">Voir les nouveaux utilisateurs</a><br>
+            <a id="button2" class="button" href="index.php?objet=comment&action=alertsComment">Voir les commentaires signalés</a>
         </div>
     <?php
     } else {

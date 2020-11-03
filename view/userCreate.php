@@ -1,7 +1,7 @@
 <section class="apod">
     <div class="block">
         <form class="formLogin" method="post">
-            <p>Veuillez entrez vos login et mot de passe</p>
+            <p>Veuillez choisir vos login et mot de passe</p>
             <label for="newUser">Login</label>
             <input type="text" name="userLogin">
 

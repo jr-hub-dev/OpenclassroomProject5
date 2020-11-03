@@ -15,7 +15,7 @@
 				<li><a href='index.php?objet=user&action=admin'>Admin</a></li>
 			<?php } ?>
 			<?php if (array_key_exists('userLogin', $_SESSION)) { ?>
-				<li><a href='index.php?objet=post&action=postsList'>APOD de la semaine</a></li>
+				<li><a href='index.php?objet=post&action=postsList'>Archives</a></li>
 				<li><a href='index.php?objet=user&action=upload'>Envoyer vos photos!</a></li>
 				<li><a href="index.php?objet=user&action=logout">Logout</a></li>
 			<?php } ?>

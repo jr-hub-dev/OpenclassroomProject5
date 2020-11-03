@@ -1,7 +1,7 @@
 <?php if (array_key_exists('userLogin', $_SESSION)) { ?>
     <section class="apod">
 
-        <h1>Proposer vos photos du ciel, elles seront peut-être selectionnées pour apparaître sur notre site prochainement !</h1>
+        <h1 id='titleUp'>Proposer vos photos du ciel, elles seront peut-être selectionnées pour apparaître sur notre site prochainement !</h1>
         <div class="block">
             <form method="POST" enctype="multipart/form-data">
                 <input type="file" name="uploaded_file" /> <br />

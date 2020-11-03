@@ -70,11 +70,9 @@ class UserController
     {
         $userManager = new UserManager();
         $admin = $userManager->isAdmin();
-        if (!empty($_SESSION)) {
-            if ($admin === "admin") {
+        if (!empty($_SESSION) && $_SESSION['userLevel'] == 'admin') {
                 $template = 'adminPage';
                 include '../view/layout.php';
-            }
         } else {
             header('Location: index.php?action=home');
         }
@@ -105,7 +103,8 @@ class UserController
             $userManager = new UserManager();
             $userId = $userManager->checkLoginPassword($this->userClean);
 
-            header('Location: index.php?objet=user&action=view&id=' . $userId);
+            $template = 'validationPage';
+            include '../view/layout.php';
         }
 
         $template = 'userCreate';

@@ -1,4 +1,4 @@
-<section class="apod">
+<section class="apod2">
     <?php if (array_key_exists('userLogin', $_SESSION) && $_SESSION['userLevel'] == 'admin') { ?>
         <div class ="block">
             <a class="button" href="index.php?objet=user&action=alertsUser">Voir les nouveaux utilisateurs</a>

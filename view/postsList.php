@@ -1,6 +1,6 @@
 <section class="apod2">
     <table>
-        <tbody>
+        <tbody id="tbody">
             <?php foreach ($posts as $post) { ?>
                 <tr>
                     <td><a href="index.php?objet=post&action=view&id=<?php echo $post->getId(); ?>" title="afficher <?php echo $post->getTitle(); ?> - <?php echo $post->getId(); ?>"><?php echo $post->getTitle(); ?></a></td>

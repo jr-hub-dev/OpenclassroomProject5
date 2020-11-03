@@ -175,7 +175,7 @@ video {
 }
 .apod2 {
     background-image: url(../img/nebula.jpg);
-    height: 1250px;
+    height: 1500px;
     color: white;
     margin-top: -1.5%;
     text-align: center;
@@ -196,8 +196,7 @@ video {
 }
 
 #pic {
-    width: 1200px;
-    height: 800px;
+    max-width: 80%;
 }
 
 #explanation {
@@ -231,9 +230,9 @@ table {
     margin-left: 15%;
     margin-right: 15%;
     border: 1px solid black;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
 }
-tbody{
+#tbody{
     margin-top: 2%;
 }
 
@@ -242,6 +241,11 @@ tbody{
 tbody tr td {
     width: 20%;
     height: auto;
+    border: none;
+}
+tbody tr td a{
+text-decoration: none;
+color: white;
 }
 
 /*suppression des bordures internes du tableau */
@@ -250,23 +254,13 @@ td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(4) {
     border-right: hidden;
 }
 
-td {
-    border: none;
-}
-
 th {
     border-bottom: 1px solid black;
 }
 
 /*Au survol des activités du tableau*/
 
-tbody tr {
-    transition: all .2s ease-in-out;
-}
 
-tbody tr:hover {
-    background-color: #F2F2F2;
-}
 
 /*============================
  * ============================
@@ -294,10 +288,10 @@ tbody tr:hover {
 .block {
     font-size: 40px;
     position: relative;
-    top: 30%;
+    top: 25%;
     border: 1px solid;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 20px;
+    padding: 25px;
     width: 70%;
     font-size: 20px;
     margin-left: 15%;
@@ -390,16 +384,18 @@ footer {
     }
     #banniere #menu {
         width: 100%;
-        height: 170px;
+        height: auto;
         position: absolute;
         visibility: hidden;
+
         z-index: 10;
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: black;
         font-weight: bold;
         display: block;
-        font-size: 1.5em;
+        font-size: 1.3em;
     }
     #banniere #menu a {
+        color: white;
         margin-right: 45px;
         border-top: none;
         font-size: 0.8em;

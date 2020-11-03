@@ -147,7 +147,7 @@ class UserController
 
             if (isset($_POST['submit'])) {
 
-                $maxSize = 70000;
+                $maxSize = 2000000;
                 $validExt = array('.jpg', '.jpeg', '.png');
                 $fileSize = $_FILES['uploaded_file']['size'];
                 $fileName = $_FILES['uploaded_file']['name'];
@@ -166,6 +166,8 @@ class UserController
             }
             $template = 'fileUpload';
             include '../view/layout.php';
+        } else {
+            echo "Vous devez être identifié pour accéder à cette page";
         }
     }
     /**

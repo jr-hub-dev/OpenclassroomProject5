@@ -27,62 +27,33 @@ class PostController
         return $errors;
     }
 
-    public function testFile()
-    {
-        if (isset($_POST['submit'])) {
-
-            $maxSize = 70000;
-            $validExt = array('.jpg', '.jpeg', '.png');
-            $fileSize = $_FILES['uploaded_file']['size'];
-            $fileName = $_FILES['uploaded_file']['name'];
-            $fileExt = "." . strtolower(substr(strrchr($fileName, '.'), 1));
-            var_dump($_FILES);
-
-
-            if ($_FILES['uploaded_file']['error'] > 0) {
-                echo 'une erreur est survenue';
-            } elseif ($fileSize > $maxSize) {
-                echo 'le fichier est trop gros';
-            } elseif (!in_array($fileExt, $validExt)) {
-
-                echo 'extension nest pas bonne';
-            } else {
-                $this->upload($fileExt);
-            }
-        }
-        $template = 'fileUpload';
-        include '../view/layout.php';
-    }
-
-    public function upload($fileExt)
-    {
-        $postManager = new PostManager();
-        $postManager->uploadFile($fileExt);
-    }
     /**
      * Afficher vue
      */
     public function view($postId)
     {
+        if (!empty($_SESSION)) {
 
-        $postManager = new PostManager();
-        $post = $postManager->getPost($postId);
+            $postManager = new PostManager();
+            $post = $postManager->getPost($postId);
 
+            //Traitement du formulaire
+            $errors = $this->cleanData();
+            $commentManager = new CommentManager();
+            if (!empty($this->commentClean) && empty($errors)) {
 
-        //Traitement du formulaire
-        $errors = $this->cleanData();
-        $commentManager = new CommentManager();
-        if (!empty($this->commentClean) && empty($errors)) {
+                $commentManager->create($postId, $this->commentClean);
 
-            $commentManager->create($postId, $this->commentClean);
+                header('Location: index.php?objet=post&action=view&id=' . $postId);
+            }
 
-            header('Location: index.php?objet=post&action=view&id=' . $postId);
+            $comments = $commentManager->getAllByPostId($postId);
+
+            $template = 'postView';
+            include '../view/layout.php';
+        } else {
+            echo "Vous devez être authentifié pour accéder à cette page";
         }
-
-        $comments = $commentManager->getAllByPostId($postId);
-
-        $template = 'postView';
-        include '../view/layout.php';
     }
 
 
@@ -110,10 +81,14 @@ class PostController
     //Affiche la liste des posts
     public function displayAll()
     {
-        $postManager = new PostManager();
-        $posts = $postManager->getPosts();
+        if (!empty($_SESSION)) {
+            $postManager = new PostManager();
+            $posts = $postManager->getPosts();
 
-        $template = 'postsList';
-        include '../view/layout.php';
+            $template = 'postsList';
+            include '../view/layout.php';
+        } else {
+            echo "Vous devez être authentifié pour accéder à cette page";
+        }
     }
 }

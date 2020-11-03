@@ -20,25 +20,17 @@ class ApodService
         ]);
 
         $data = curl_exec($curl);
-        if ($data === false) {
-        } else {
+        if ($data === false) { } else {
             $data = json_decode($data, true);
-            echo '<pre>';
-var_dump($data);
-var_dump($data['title']);
-            echo '</pre>';           
         }
         curl_close($curl);
 
         return $data;
     }
-    
+
     public function create()
     {
-        echo 'Bonjour';
         $postManager = new PostManager();
-        echo 'Bonjour2';
         $postManager->create($this->getData());
-        echo 'Bonjour3';
     }
 }

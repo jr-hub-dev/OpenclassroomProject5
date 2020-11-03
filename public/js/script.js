@@ -1,6 +1,6 @@
 var req = new XMLHttpRequest();
 var url = "https://api.nasa.gov/planetary/apod?api_key=";
-var api_key = "9EebJIpfeS1NVqrnCpeh5LoxKv304ziCRP0alJbn";
+var api_key = "nzye4HSwrWQultOhnaCRcNEfTE99MfhIeutItkDR";
 
 
 req.open("GET", url + api_key);
@@ -12,7 +12,7 @@ req.addEventListener("load", function(){
     document.getElementById("title").textContent = response.title;
     document.getElementById("date").textContent = response.date;
     if(response)
-    document.getElementById("pic").src = response.hdurl;
+    // document.getElementById("pic").src = response.hdurl;
     document.getElementById("explanation").textContent = response.explanation;
   }
 })

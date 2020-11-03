@@ -1,5 +1,5 @@
 <?php if (array_key_exists('userLogin', $_SESSION)) { ?>
-    <section class="apod">
+    <section class="apod2">
 
         <h1 id='titleUp'>Proposer vos photos du ciel, elles seront peut-être selectionnées pour apparaître sur notre site prochainement !</h1>
         <div class="block">

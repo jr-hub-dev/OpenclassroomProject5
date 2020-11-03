@@ -1,5 +1,5 @@
 <?php if (array_key_exists('userLogin', $_SESSION) && $_SESSION['userLevel'] == 'admin') { ?>
-    <section class="apod">
+    <section class="apod2">
         <div id="blockComments">
             <table>
                 <tbody>

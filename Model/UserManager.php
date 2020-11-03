@@ -69,7 +69,7 @@ class UserManager extends Database
             } else {
                 echo 'Mauvais login ou mot de passe';
             }
-        //Si l'inscription de l'utilisateur est en attente de validation par l'administrateur
+            //Si l'inscription de l'utilisateur est en attente de validation par l'administrateur
         } elseif ($resultat['alert'] == 1) {
             echo 'Votre inscription est en attente';
         }
@@ -112,7 +112,7 @@ class UserManager extends Database
     public function validUser($userId)
     {
         $user = $this->getUser($userId);
-        
+
         if (!empty($user)) {
             $bdd = $this->dbConnect();
             $req = $bdd->prepare('UPDATE user SET alert = 0 WHERE id = :userId');
@@ -124,7 +124,7 @@ class UserManager extends Database
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('DELETE FROM user WHERE id = ?');
-        
+
         return $req->execute(array($userId));
     }
 
@@ -164,11 +164,11 @@ class UserManager extends Database
             $req->execute([':login' => $login]);
         }
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
-        
+
 
         //On test si le login existe ou non en db
         if (!empty($result)) {
-            echo 'Le login existe déjà';
+            echo '<p id=existingLogin>Le login est déjà utilisé</p>';
             exit;
             //Si le login est ok, on test si l'email existe ou pas en db
         } else {
@@ -180,7 +180,7 @@ class UserManager extends Database
             $result2 = $req2->fetchAll(PDO::FETCH_ASSOC);
         } //Si l'email est deja utilisé
         if (!empty($result2)) {
-            echo 'Cet email est déjà utilisé';
+            echo '<p id=existingEmain>Cet email existe déjà utilisé</p>';
             exit;
             //Si le login ou l'email sont tous les deux ok, on enregistre l'utilisateur en db
         } else {
@@ -195,7 +195,7 @@ class UserManager extends Database
     {
         //Cryptage du mot de passe
         $secure_pass = password_hash($userClean['userPassword'], PASSWORD_BCRYPT);
-        
+
 
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('INSERT INTO user(login, password, email, creation, alert) VALUES (?, ?, ?, NOW(), 1)');
@@ -227,16 +227,19 @@ class UserManager extends Database
 
         return $req->execute(array($userId));
     }
+
+    /**
+     * Permet d'uploader un ficher - le nom d'utilisateur sera indiqué dans le nom du fichier
+     */
     public function uploadFile($fileExt)
     {
         $tmpName = $_FILES['uploaded_file']['tmp_name'];
         $uniqueName = $_SESSION['userLogin'] . md5(uniqid(rand(), true));
         $fileName = "../upload/" . $uniqueName . $fileExt;
         $resultat = move_uploaded_file($tmpName, $fileName);
-        if($resultat){
-            echo 'fichier uploader';
+        if ($resultat) {
+            echo '<p id=uploadedFile>fichier uploader</p>';
         }
-
     }
 
     /**

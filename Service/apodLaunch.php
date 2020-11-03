@@ -3,10 +3,10 @@
 use App\Service\ApodService;
 
 spl_autoload_register(function ($class) {
-    
+
     $class = __DIR__ . '/../' . str_replace("\\", '/', $class) . '.php';
     $class = str_replace("App/", '', $class);
-        echo $class . "\n";
+    echo $class . "\n";
 
     if (is_file($class)) {
         echo 1;

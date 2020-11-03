@@ -33,11 +33,10 @@ class CommentController
         $template = 'alertsComment';
         include '../view/layout.php';
     }
-    
 
     //Supprimer un comment
     public function delete($commentId)
-    {        
+    {
         $commentManager = new CommentManager();
         $comment = $commentManager->getcomment($commentId);
 

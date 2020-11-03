@@ -56,7 +56,6 @@ class PostController
         }
     }
 
-
     public function getData()
     {
         $curl = curl_init('https://api.nasa.gov/planetary/apod?api_key=uQ71al00jCuNnjNYTfeGvzsHKWBessjLq2h24HpO');

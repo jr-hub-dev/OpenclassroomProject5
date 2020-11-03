@@ -45,6 +45,7 @@ class UserController
 
     public function checkUser() //juste check
     {
+        if (empty($_SESSION)){
         $errors = $this->cleanData();
 
         if (!empty($this->userClean) && empty($errors)) {
@@ -56,6 +57,9 @@ class UserController
 
         $template = 'loginPage';
         include '../view/layout.php';
+        } else {
+            echo 'Vous êtes déjà loguer';
+        }
     }
 
     public function logout() //juste check
@@ -71,8 +75,8 @@ class UserController
         $userManager = new UserManager();
         $admin = $userManager->isAdmin();
         if (!empty($_SESSION) && $_SESSION['userLevel'] == 'admin') {
-                $template = 'adminPage';
-                include '../view/layout.php';
+            $template = 'adminPage';
+            include '../view/layout.php';
         } else {
             header('Location: index.php?action=home');
         }

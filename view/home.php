@@ -21,7 +21,7 @@ require_once('header.php');
         <h3 id="title"></h3>
         <h4>Date: <span id="date"></span></h4>
         <img id="pic" src="https://apod.nasa.gov/apod/image/2009/Jupiters1_swimmingstormsACasely.jpg" alt="NASA Picture Of The Day" width="100%">
-        
+
         <p id="explanation"></p>
     </section>
 </body>

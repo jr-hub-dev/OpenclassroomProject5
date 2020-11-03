@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-
-
 class Controller
 {   //Redirection vers home
     public function home()

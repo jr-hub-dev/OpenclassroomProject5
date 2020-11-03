@@ -33,13 +33,12 @@ class PostManager extends Database
         return $posts;
     }
 
-
     //Création nouveau post
     public function create($data)
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('INSERT INTO post(title, img_url, explanation, creation) VALUES (?, ?, ?, ?)');
-        
+
         return $req->execute(array($data['title'], $data['url'], $data['explanation'], $data['date']));
     }
 
@@ -51,8 +50,6 @@ class PostManager extends Database
 
         return $req->execute(array($postId));
     }
-
-    
 
     //Hydratation de l'objet
     public function hydrate($data)

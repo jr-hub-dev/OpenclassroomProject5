@@ -21,7 +21,7 @@ class PostManager extends Database
     public function getPosts()
     {
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT post_id, title, img_url, explanation, creation FROM post');
+        $req = $bdd->prepare('SELECT post_id, title, img_url, explanation, creation FROM post ORDER BY post_id DESC LIMIT 5');
         $req->execute();
         $result = $req->fetchAll();
 

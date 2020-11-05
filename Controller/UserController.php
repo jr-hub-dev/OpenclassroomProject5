@@ -105,7 +105,7 @@ class UserController
         if (!empty($this->userClean) && empty($errors)) {
 
             $userManager = new UserManager();
-            $userId = $userManager->checkLoginPassword($this->userClean);
+            $userManager->checkLoginPassword($this->userClean);
 
             $template = 'validationPage';
             include '../view/layout.php';

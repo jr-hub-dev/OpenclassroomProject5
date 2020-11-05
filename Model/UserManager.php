@@ -67,11 +67,11 @@ class UserManager extends Database
                 //On appelle la fonction pour assigner les rôles
                 $this->roleAssign($resultat, $loginClean);
             } else {
-                echo 'Mauvais login ou mot de passe';
+                echo '<p id=wrongSignIn>Mauvais login ou mot de passe</p>';
             }
             //Si l'inscription de l'utilisateur est en attente de validation par l'administrateur
         } elseif ($resultat['alert'] == 1) {
-            echo 'Votre inscription est en attente';
+            echo '<p id=pendingUser>Votre inscription est en attente</p>';
         }
     }
 

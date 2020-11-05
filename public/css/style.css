@@ -446,6 +446,20 @@ footer {
     position: relative;
     right: 1.5%;
 }
+#pendingUser{
+    position: relative;
+    top: 70%;
+    left: 38%;
+    color: white;
+    font-size: 25px;
+}
+#wrongSignIn{
+    position: relative;
+    top: 70%;
+    left: 38%;
+    color: white;
+    font-size: 25px;
+}
 /*============================
  * ============================
  * 	Page logout
@@ -526,7 +540,7 @@ footer {
         bottom: -20%;
     }
     .apod2 {
-        height: auto;
+        height: 500px;
     }
     #apod3 {
         height: 700px;

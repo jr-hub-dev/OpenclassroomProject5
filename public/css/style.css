@@ -467,6 +467,20 @@ footer {
     color: white;
     font-size: 25px;
 }
+.errorLogin{
+    position: absolute;
+    top: 65%;
+    left: 38%;
+    color: white;
+    font-size: 25px;
+}
+#errorMdp{
+    position: absolute;
+    top: 70%;
+    left: 38%;
+    color: white;
+    font-size: 25px;
+}
 /*============================
  * ============================
  * 	Page logout

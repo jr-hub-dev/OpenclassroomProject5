@@ -20,14 +20,14 @@ class UserController
                 //Verification du login
                 if (array_key_exists('userLogin', $this->userClean)) {
                     if ('' === $this->userClean['userLogin']) {
-                        $errors[] = 'Veuillez entrer un login';
+                        $errors[] = '<p class ="errorLogin">Veuillez entrer un login</p>';
                     } elseif (strlen($this->userClean['userLogin']) < 5) {
-                        $errors[] = 'Votre login doit faire plus de 5 lettres';
+                        $errors[] = '<p class ="errorLogin">Votre login doit faire plus de 5 lettres</p>';
                     }
                 }
                 //Verification du mot de passe
                 if (array_key_exists('userPassword', $this->userClean) && '' === $this->userClean['userPassword']) {
-                    $errors[] = 'Veuillez entrer un mot de passe';
+                    $errors[] = '<p id="errorMdp">Veuillez entrer un mot de passe';
                 }
             }
         }
@@ -73,7 +73,7 @@ class UserController
     public function admin() //juste check
     {
         $userManager = new UserManager();
-        $admin = $userManager->isAdmin();
+        $userManager->isAdmin();
         if (!empty($_SESSION) && $_SESSION['userLevel'] == 'admin') {
             $template = 'adminPage';
             include '../view/layout.php';

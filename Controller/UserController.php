@@ -45,18 +45,18 @@ class UserController
 
     public function checkUser() //juste check
     {
-        if (empty($_SESSION)){
-        $errors = $this->cleanData();
+        if (empty($_SESSION)) {
+            $errors = $this->cleanData();
 
-        if (!empty($this->userClean) && empty($errors)) {
-            $userManager = new UserManager();
-            $login = $this->userClean['userLogin'];
-            $password = $this->userClean['userPassword'];
-            $userManager->checkUser($login, $password);
-        }
+            if (!empty($this->userClean) && empty($errors)) {
+                $userManager = new UserManager();
+                $login = $this->userClean['userLogin'];
+                $password = $this->userClean['userPassword'];
+                $userManager->checkUser($login, $password);
+            }
 
-        $template = 'loginPage';
-        include '../view/layout.php';
+            $template = 'loginPage';
+            include '../view/layout.php';
         } else {
             echo 'Vous êtes déjà loguer';
         }
@@ -159,10 +159,10 @@ class UserController
                 if ($_FILES['uploaded_file']['error'] > 0) {
                     echo 'une erreur est survenue';
                 } elseif ($fileSize > $maxSize) {
-                    echo 'le fichier est trop gros';
+                    echo '<p class ="uploadError">le fichier est trop gros</p>';
                 } elseif (!in_array($fileExt, $validExt)) {
 
-                    echo 'extension nest pas bonne';
+                    echo '<p class ="uploadError">L\'extension n\'est pas bonne (le fichier doit être un format .jpg .jpeg ou .png)</p>';
                 } else {
                     $this->upload($fileExt);
                 }

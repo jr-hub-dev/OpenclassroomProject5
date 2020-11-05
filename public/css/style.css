@@ -332,6 +332,13 @@ th {
     color: white;
     font-size: 25px;
 }
+.uploadError{
+    position: relative;
+    top: 70%;
+    left: 30%;
+    color: white;
+    font-size: 25px;
+}
 
 /*============================
  * ============================
